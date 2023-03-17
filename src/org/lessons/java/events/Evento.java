@@ -76,10 +76,21 @@ public class Evento {
         if (data.isBefore(LocalDate.now())) {
             throw new IllegalArgumentException("L'evento si è tenuto il " + data + ". Non è possibile prenotare.");
         }
-        if ((postiPrenotati) < capienzaMassima) {
+        if (postiPrenotati < capienzaMassima) {
             postiPrenotati++;
         } else {
             throw new RuntimeException("L'evento " + titolo + " è pieno.");
+        }
+    }
+
+    public void disdici() throws RuntimeException, IllegalArgumentException {
+        if (data.isBefore(LocalDate.now())) {
+            throw new IllegalArgumentException("L'evento si è tenuto il " + data + ". Non è possibile prenotare.");
+        }
+        if (postiPrenotati <= 0) {
+            throw new RuntimeException("Non c'è nessuna prenotazione per l'evento " + titolo + ".");
+        } else {
+            postiPrenotati--;
         }
     }
 }
