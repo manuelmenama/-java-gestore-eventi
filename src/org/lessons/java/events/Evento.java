@@ -50,14 +50,18 @@ public class Evento {
     }
 
     //metodi
-
+    public String getFormattaData(LocalDate data) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String dataFormattata = data.format(dateTimeFormatter);
+        return dataFormattata;
+    }
     @Override
     public String toString() {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         return "Evento{" +
                 "titolo='" + titolo + '\'' +
-                ", data=" + data.format(dateTimeFormatter) +
+                ", data=" + getFormattaData(data) +
                 ", capienzaMassima=" + capienzaMassima +
                 ", postiPrenotati=" + postiPrenotati +
                 '}';

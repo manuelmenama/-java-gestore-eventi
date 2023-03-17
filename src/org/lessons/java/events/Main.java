@@ -1,6 +1,8 @@
 package org.lessons.java.events;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Scanner;
@@ -10,18 +12,29 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
 
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH.mm");
+
+        Concerto concerto = new Concerto("Queen", LocalDate.parse("10/10/2025", dateTimeFormatter), 200, LocalTime.parse("10.00", timeFormatter), new BigDecimal(15));
+
+        System.out.println(concerto.toString());
+
         System.out.println("Inserisci un nuovo evento!");
         System.out.print("Titolo: ");
         String titolo = scanner.nextLine();
 
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         System.out.print("Data (dd/mm/yyyy): ");
         LocalDate data = LocalDate.parse(scanner.nextLine(), dateTimeFormatter);
 
         System.out.print("Capienza massima: ");
         int capienzaMassima = Integer.parseInt(scanner.nextLine());
 
-        Evento evento = new Evento(titolo, data, capienzaMassima);
+        Evento evento = null;
+        try {
+            evento = new Evento(titolo, data, capienzaMassima);
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException(e);
+        }
 
         System.out.println(evento.toString());
 
