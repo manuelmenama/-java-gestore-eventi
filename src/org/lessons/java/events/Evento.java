@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 public class Evento {
     //attributi
+    private static final int CAPIENZA_MINIMA = 1;
     private String titolo;
     private LocalDate data;
     private int capienzaMassima;
@@ -13,10 +14,9 @@ public class Evento {
 
     public Evento(String titolo, LocalDate data, int capienzaMassima) throws IllegalArgumentException{
         this.titolo = titolo;
-        if (LocalDate.now().isAfter(data)){
-            throw new IllegalArgumentException("La data deve essere successiva a " + LocalDate.now() + ".");
-        }
+        verificaDataErrata(data);
         this.data = data;
+        verificaCapienza(capienzaMassima);
         this.capienzaMassima = capienzaMassima;
         postiPrenotati = 0;
     }
@@ -35,16 +35,13 @@ public class Evento {
         return data;
     }
 
-    public void setData(LocalDate data) {
+    public void setData(LocalDate data) throws IllegalArgumentException{
+        verificaDataErrata(data);
         this.data = data;
     }
 
     public int getCapienzaMassima() {
         return capienzaMassima;
-    }
-
-    public void setCapienzaMassima(int capienzaMassima) {
-        this.capienzaMassima = capienzaMassima;
     }
 
     public static int getPostiPrenotati() {
@@ -59,6 +56,30 @@ public class Evento {
                 "titolo='" + titolo + '\'' +
                 ", data=" + data +
                 ", capienzaMassima=" + capienzaMassima +
+                ", postiPrenotati=" + postiPrenotati +
                 '}';
+    }
+
+    private void verificaDataErrata(LocalDate data) throws IllegalArgumentException{
+        if (LocalDate.now().isAfter(data)){
+            throw new IllegalArgumentException("La data deve essere successiva a " + LocalDate.now() + ".");
+        }
+    }
+
+    private void verificaCapienza(int capienza) throws IllegalArgumentException {
+        if (capienza <= CAPIENZA_MINIMA) {
+            throw new IllegalArgumentException("La capienza deve essere almeno di " + CAPIENZA_MINIMA + " posti.");
+        }
+    }
+
+    public void prenota() throws RuntimeException, IllegalArgumentException{
+        if (data.isBefore(LocalDate.now())) {
+            throw new IllegalArgumentException("L'evento si è tenuto il " + data + ". Non è possibile prenotare.");
+        }
+        if ((postiPrenotati) < capienzaMassima) {
+            postiPrenotati++;
+        } else {
+            throw new RuntimeException("L'evento " + titolo + " è pieno.");
+        }
     }
 }
