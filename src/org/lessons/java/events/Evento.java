@@ -9,7 +9,7 @@ public class Evento {
     private String titolo;
     private LocalDate data;
     private int capienzaMassima;
-    private static int postiPrenotati;
+    private int postiPrenotati;
 
     //costruttori
 
@@ -45,7 +45,7 @@ public class Evento {
         return capienzaMassima;
     }
 
-    public static int getPostiPrenotati() {
+    public int getPostiPrenotati() {
         return postiPrenotati;
     }
 
@@ -79,6 +79,7 @@ public class Evento {
         if (data.isBefore(LocalDate.now())) {
             throw new IllegalArgumentException("L'evento si è tenuto il " + data + ". Non è possibile prenotare.");
         }
+
         if (postiPrenotati < capienzaMassima) {
             postiPrenotati++;
         } else {
@@ -95,5 +96,17 @@ public class Evento {
         } else {
             postiPrenotati--;
         }
+    }
+
+    public int getPostiDisponibili() {
+        return getCapienzaMassima() - getPostiPrenotati();
+    }
+
+    public boolean verificaPrenotazione(int prenotazioniDisdetteRichieste) {
+        return prenotazioniDisdetteRichieste <= (getPostiDisponibili());
+    }
+
+    public boolean verificaDisdette(int disdette) {
+        return getPostiPrenotati() >= disdette;
     }
 }
