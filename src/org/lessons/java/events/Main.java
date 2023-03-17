@@ -15,8 +15,6 @@ public class Main {
 
         evento.disdici();
 
-        evento.disdici();
-
         evento.setData(LocalDate.of(2025,1,1));
 
         System.out.println(evento.toString());

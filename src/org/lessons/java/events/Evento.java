@@ -1,6 +1,7 @@
 package org.lessons.java.events;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Evento {
     //attributi
@@ -52,9 +53,11 @@ public class Evento {
 
     @Override
     public String toString() {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
         return "Evento{" +
                 "titolo='" + titolo + '\'' +
-                ", data=" + data +
+                ", data=" + data.format(dateTimeFormatter) +
                 ", capienzaMassima=" + capienzaMassima +
                 ", postiPrenotati=" + postiPrenotati +
                 '}';
