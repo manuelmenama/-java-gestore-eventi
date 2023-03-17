@@ -4,7 +4,9 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -16,6 +18,7 @@ public class Main {
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH.mm");
 
         Concerto concerto = new Concerto("Queen", LocalDate.parse("10/10/2025", dateTimeFormatter), 200, LocalTime.parse("10.00", timeFormatter), new BigDecimal(15));
+
 
         System.out.println(concerto.toString());
 
@@ -97,6 +100,16 @@ public class Main {
         //posti prenotati e disponibili
         System.out.println("Posti prenotati complessivi: " + evento.getPostiPrenotati());
         System.out.println("Posti disponibili: " + evento.getPostiDisponibili());
+
+
+        //aggiungo eventi
+        ProgrammaEventi programmaEventi = new ProgrammaEventi("Nuovo");
+        programmaEventi.addEvento(concerto);
+        programmaEventi.addEvento(evento);
+        //li ordino
+        programmaEventi.ordinaListaEventi();
+        //stampo
+        System.out.println(programmaEventi.getEventi().toString());
 
         scanner.close();
     }

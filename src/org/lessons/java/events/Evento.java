@@ -3,7 +3,7 @@ package org.lessons.java.events;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Evento {
+public class Evento{
     //attributi
     private static final int CAPIENZA_MINIMA = 1;
     private String titolo;
@@ -113,4 +113,5 @@ public class Evento {
     public boolean verificaDisdette(int disdette) {
         return getPostiPrenotati() >= disdette;
     }
+
 }
