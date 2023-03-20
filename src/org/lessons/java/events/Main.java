@@ -111,6 +111,9 @@ public class Main {
         //stampo
         System.out.println(programmaEventi.getEventi().toString());
 
+        //filtro per eventi
+        System.out.println("Selected event: " + programmaEventi.eventiFiltratiPerData(LocalDate.of(2025,10, 10)).toString());
+
         scanner.close();
     }
 

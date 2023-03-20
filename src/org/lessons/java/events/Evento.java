@@ -2,6 +2,7 @@ package org.lessons.java.events;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 public class Evento{
     //attributi
@@ -114,4 +115,23 @@ public class Evento{
         return getPostiPrenotati() >= disdette;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Evento evento)) return false;
+
+        if (capienzaMassima != evento.capienzaMassima) return false;
+        if (postiPrenotati != evento.postiPrenotati) return false;
+        if (!Objects.equals(titolo, evento.titolo)) return false;
+        return Objects.equals(data, evento.data);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = titolo != null ? titolo.hashCode() : 0;
+        result = 31 * result + (data != null ? data.hashCode() : 0);
+        result = 31 * result + capienzaMassima;
+        result = 31 * result + postiPrenotati;
+        return result;
+    }
 }

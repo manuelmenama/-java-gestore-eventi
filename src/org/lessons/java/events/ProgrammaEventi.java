@@ -1,5 +1,7 @@
 package org.lessons.java.events;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -59,6 +61,23 @@ public class ProgrammaEventi{
                 return o1.getData().compareTo(o2.getData());
             }
         });
+    }
+
+    public List<Evento> eventiFiltratiPerData(LocalDate data) {
+        List<Evento> eventiFiltrati = new ArrayList<>();
+        for (Evento evento : eventi) {
+            if (evento.getData().equals(data))
+            {
+                eventiFiltrati.add(evento);
+            }
+
+        }
+
+        return eventiFiltrati;
+    }
+
+    public void rimuoviEvento(Evento e){
+        eventi.remove(e);
     }
 
 
